@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GroceryShop</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="grocery">Grocery</string>
+    <string name="shopping">shopping</string>
+    <string name="welcome_screen_title_part">Welcome to\n</string>
+    <string name="app_logo">Application logo</string>
+</resources>
