@@ -6,4 +6,12 @@
     <string name="shopping">shopping</string>
     <string name="welcome_screen_title_part">Welcome to\n</string>
     <string name="app_logo">Application logo</string>
+    <string name="sign_up_screen_title">Welcome to Grocery App</string>
+    <string name="sign_up_screen_subtitle">Let\'s get started</string>
+    <string name="sign_in_screen_title">Sign in to Grocery App</string>
+    <string name="sign_in_screen_subtitle"><![CDATA[Enter email & password to continue]]></string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
 </resources>

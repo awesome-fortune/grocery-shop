@@ -1,4 +1,4 @@
-package za.co.masekofortune.groceryshop.ui.welcome
+package za.co.masekofortune.groceryshop.ui.screens.welcome
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
