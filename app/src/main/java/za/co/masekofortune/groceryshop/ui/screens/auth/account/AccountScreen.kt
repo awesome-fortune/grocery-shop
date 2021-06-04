@@ -4,15 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import za.co.masekofortune.groceryshop.R
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
@@ -24,10 +20,9 @@ enum class AccountScreenAction { SignIn, SignUp }
 
 @Composable
 fun AccountScreen(
-    modifier: Modifier = Modifier,
     action: AccountScreenAction = AccountScreenAction.SignIn
 ) {
-    var screenAction by rememberSaveable { mutableStateOf(action) }
+    var screenAction by remember { mutableStateOf(action) }
 
     Column(
         Modifier
@@ -40,55 +35,70 @@ fun AccountScreen(
             shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
         ) {
             Column {
-                Row(
-                    modifier
-                        .fillMaxWidth()
-                        .background(color = Color.White)
-                        .padding(8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    TextButton(
-                        onClick = { screenAction = AccountScreenAction.SignIn },
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Color.White,
-                            contentColor = if (screenAction == AccountScreenAction.SignIn) Green400 else Raven
-                        )
-                    ) {
-                        Text(stringResource(R.string.sign_in))
-                    }
-                    TextButton(
-                        onClick = { screenAction = AccountScreenAction.SignUp },
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Color.White,
-                            contentColor = if (screenAction == AccountScreenAction.SignUp) Green400 else Raven
-                        )
-                    ) {
-                        Text(stringResource(R.string.sign_up))
-                    }
-                }
-                Column(
-                    Modifier
-                        .background(color = Color.White)
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    if (screenAction == AccountScreenAction.SignUp) {
-                        AccountScreenText(
-                            title = stringResource(R.string.sign_up_screen_title),
-                            subtitle = stringResource(R.string.sign_up_screen_subtitle)
-                        )
-                    } else {
-                        AccountScreenText(
-                            title = stringResource(R.string.sign_in_screen_title),
-                            subtitle = stringResource(R.string.sign_in_screen_subtitle)
-                        )
-                    }
-                    Spacer(Modifier.height(32.dp))
-                    AccountFormFields(screenAction)
-                    Spacer(Modifier.height(8.dp))
-                    AccountFormFooter(screenAction)
-                }
+                AccountScreenToggle(
+                    screenAction = screenAction,
+                    onScreenActionChange = { screenAction = it }
+                )
+                AccountForm(screenAction)
             }
+        }
+    }
+}
+
+@Composable
+fun AccountForm(screenAction: AccountScreenAction) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        if (screenAction == AccountScreenAction.SignUp) {
+            AccountScreenText(
+                title = stringResource(R.string.sign_up_screen_title),
+                subtitle = stringResource(R.string.sign_up_screen_subtitle)
+            )
+        } else {
+            AccountScreenText(
+                title = stringResource(R.string.sign_in_screen_title),
+                subtitle = stringResource(R.string.sign_in_screen_subtitle)
+            )
+        }
+        Spacer(Modifier.height(32.dp))
+        AccountFormFields(screenAction)
+        Spacer(Modifier.height(8.dp))
+        AccountFormFooter(screenAction)
+    }
+}
+
+@Composable
+fun AccountScreenToggle(
+    screenAction: AccountScreenAction,
+    onScreenActionChange: (AccountScreenAction) -> Unit
+) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .background(color = Color.White)
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        TextButton(
+            onClick = { onScreenActionChange(AccountScreenAction.SignIn) },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.White,
+                contentColor = if (screenAction == AccountScreenAction.SignIn) Green400 else Raven
+            )
+        ) {
+            Text(stringResource(R.string.sign_in))
+        }
+        TextButton(
+            onClick = { onScreenActionChange(AccountScreenAction.SignUp) },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.White,
+                contentColor = if (screenAction == AccountScreenAction.SignUp) Green400 else Raven
+            )
+        ) {
+            Text(stringResource(R.string.sign_up))
         }
     }
 }
@@ -125,7 +135,7 @@ fun AccountFormFooter(screenAction: AccountScreenAction) {
 @Composable
 fun AccountFormFields(screenAction: AccountScreenAction) {
     TextField(
-        onValueChange = {},
+        onValueChange = { /*TODO*/ },
         value = "",
         label = { Text(stringResource(R.string.username)) },
         modifier = Modifier
@@ -134,7 +144,7 @@ fun AccountFormFields(screenAction: AccountScreenAction) {
     )
     if (screenAction == AccountScreenAction.SignUp) {
         TextField(
-            onValueChange = {},
+            onValueChange = { /*TODO*/ },
             value = "",
             label = { Text(stringResource(R.string.email_address)) },
             modifier = Modifier
@@ -143,7 +153,7 @@ fun AccountFormFields(screenAction: AccountScreenAction) {
         )
     }
     TextField(
-        onValueChange = {},
+        onValueChange = { /*TODO*/ },
         value = "",
         label = { Text(stringResource(R.string.password)) },
         modifier = Modifier
@@ -156,9 +166,15 @@ fun AccountFormFields(screenAction: AccountScreenAction) {
 fun AccountScreenText(title: String, subtitle: String) {
     Text(
         title,
-        style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Medium, color = EbonyClay)
+        style = MaterialTheme.typography.h5.copy(
+            fontWeight = FontWeight.Medium,
+            color = EbonyClay
+        )
     )
-    Text(subtitle, style = MaterialTheme.typography.subtitle1.copy(color = Raven))
+    Text(
+        subtitle,
+        style = MaterialTheme.typography.subtitle1.copy(color = Raven)
+    )
 }
 
 @Preview("Sign in screen", showBackground = true)
