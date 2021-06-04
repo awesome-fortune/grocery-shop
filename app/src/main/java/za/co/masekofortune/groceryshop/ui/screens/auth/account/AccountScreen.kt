@@ -2,6 +2,7 @@ package za.co.masekofortune.groceryshop.ui.screens.auth.account
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -33,56 +34,63 @@ fun AccountScreen(
             .background(color = CatskillWhite)
             .fillMaxSize()
     ) {
-        Row(
-            modifier
-                .fillMaxWidth()
-                .background(color = Color.White)
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+        Surface(
+            elevation = 15.dp,
+            color = MaterialTheme.colors.surface,
+            shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
         ) {
-            TextButton(
-                onClick = { screenAction = AccountScreenAction.SignIn },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White,
-                    contentColor = if (screenAction == AccountScreenAction.SignIn) Green400 else Raven
-                )
-            ) {
-                Text(stringResource(R.string.sign_in))
+            Column {
+                Row(
+                    modifier
+                        .fillMaxWidth()
+                        .background(color = Color.White)
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    TextButton(
+                        onClick = { screenAction = AccountScreenAction.SignIn },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color.White,
+                            contentColor = if (screenAction == AccountScreenAction.SignIn) Green400 else Raven
+                        )
+                    ) {
+                        Text(stringResource(R.string.sign_in))
+                    }
+                    TextButton(
+                        onClick = { screenAction = AccountScreenAction.SignUp },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color.White,
+                            contentColor = if (screenAction == AccountScreenAction.SignUp) Green400 else Raven
+                        )
+                    ) {
+                        Text(stringResource(R.string.sign_up))
+                    }
+                }
+                Column(
+                    Modifier
+                        .background(color = Color.White)
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    if (screenAction == AccountScreenAction.SignUp) {
+                        AccountScreenText(
+                            title = stringResource(R.string.sign_up_screen_title),
+                            subtitle = stringResource(R.string.sign_up_screen_subtitle)
+                        )
+                    } else {
+                        AccountScreenText(
+                            title = stringResource(R.string.sign_in_screen_title),
+                            subtitle = stringResource(R.string.sign_in_screen_subtitle)
+                        )
+                    }
+                    Spacer(Modifier.height(32.dp))
+                    AccountFormFields(screenAction)
+                    Spacer(Modifier.height(8.dp))
+                    AccountFormFooter(screenAction)
+                }
             }
-            TextButton(
-                onClick = { screenAction = AccountScreenAction.SignUp },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White,
-                    contentColor = if (screenAction == AccountScreenAction.SignUp) Green400 else Raven
-                )
-            ) {
-                Text(stringResource(R.string.sign_up))
-            }
-        }
-        Column(
-            Modifier
-                .background(color = Color.White)
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            if (screenAction == AccountScreenAction.SignUp) {
-                AccountScreenText(
-                    title = stringResource(R.string.sign_up_screen_title),
-                    subtitle = stringResource(R.string.sign_up_screen_subtitle)
-                )
-            } else {
-                AccountScreenText(
-                    title = stringResource(R.string.sign_in_screen_title),
-                    subtitle = stringResource(R.string.sign_in_screen_subtitle)
-                )
-            }
-            Spacer(Modifier.height(32.dp))
-            AccountFormFields(screenAction)
-            Spacer(Modifier.height(8.dp))
-            AccountFormFooter(screenAction)
         }
     }
-
 }
 
 @Composable
