@@ -2,6 +2,7 @@ package za.co.masekofortune.groceryshop.ui.screens.auth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +27,7 @@ fun AddNumberScreen() {
         topBar = {
             TopAppBar(
                 elevation = 5.dp,
-                title = { Text(stringResource(R.string.add_number_screen_action_bar_title)) },
+                title = { Text(stringResource(R.string.add_number_screen_top_bar_title)) },
                 navigationIcon = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(
@@ -48,13 +50,12 @@ fun AddNumberForm(modifier: Modifier = Modifier) {
         elevation = 15.dp,
         color = MaterialTheme.colors.surface,
         shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp),
-        modifier = modifier
-            .fillMaxWidth()
-
+        modifier = modifier.fillMaxWidth()
     ) {
         Column(modifier.padding(16.dp)) {
             Text(
-                stringResource(R.string.add_number_screen_title), style = MaterialTheme.typography.h5.copy(
+                stringResource(R.string.add_number_screen_title),
+                style = MaterialTheme.typography.h5.copy(
                     fontWeight = FontWeight.Medium,
                     color = EbonyClay
                 )
@@ -67,6 +68,7 @@ fun AddNumberForm(modifier: Modifier = Modifier) {
                 value = "",
                 onValueChange = { /* TODO */ },
                 placeholder = { Text(stringResource(R.string.mobile_number_placeholder)) },
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone),
                 modifier = modifier
                     .padding(vertical = 16.dp)
                     .fillMaxWidth()

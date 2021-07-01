@@ -1,4 +1,4 @@
-package za.co.masekofortune.groceryshop.ui.screens.welcome
+package za.co.masekofortune.groceryshop.ui.screens.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,7 +40,7 @@ fun WelcomeScreen() {
         }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = buildAnnotatedString {
+                buildAnnotatedString {
                     append(stringResource(R.string.welcome_screen_title_part))
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                         append(stringResource(R.string.grocery))

@@ -1,8 +1,9 @@
-package za.co.masekofortune.groceryshop.ui.screens.auth.account
+package za.co.masekofortune.groceryshop.ui.screens.auth
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -11,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import za.co.masekofortune.groceryshop.R
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
@@ -149,7 +151,8 @@ fun AccountFormFields(screenAction: AccountScreenAction) {
             label = { Text(stringResource(R.string.email_address)) },
             modifier = Modifier
                 .padding(bottom = 8.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
         )
     }
     TextField(
@@ -158,7 +161,8 @@ fun AccountFormFields(screenAction: AccountScreenAction) {
         label = { Text(stringResource(R.string.password)) },
         modifier = Modifier
             .padding(bottom = 8.dp)
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
     )
 }
 

@@ -14,10 +14,14 @@
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
-    <string name="add_number_screen_action_bar_title">Add number</string>
+    <string name="add_number_screen_top_bar_title">Add number</string>
     <string name="back_arrow_content_description">Go back</string>
     <string name="add_number_send_button">Send</string>
     <string name="add_number_screen_title">What\'s your number</string>
     <string name="add_number_screen_subtitle">Enter mobile number to continue</string>
     <string name="mobile_number_placeholder">Your mobile number</string>
+    <string name="verify_number_screen_top_bar_title">Verify number</string>
+    <string name="verify_number_screen_title">Verify your number</string>
+    <string name="verify_btn">Verify</string>
+    <string name="resend_btn">Resend</string>
 </resources>
